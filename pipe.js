@@ -20,9 +20,9 @@ async function fetchPipedriveData() {
 }
 
 // Function to update data in Pipedrive (e.g., update a deal)
-async function updatePipedriveData(person, updatedData) {
+async function updatePipedriveData(personId, updatedData) {
   try {
-    const response = await axios.put(`https://Rian-Sandbox.pipedrive.com/v1/persons${person}`, updatedData, {
+    const response = await axios.put(`https://Rian-Sandbox.pipedrive.com/v1/persons${personId}`, updatedData, {
       params: {
         api_token: pipedriveApiKey,
       },
@@ -48,9 +48,9 @@ function fetchPipedriveDataMiddleware(req, res, next) {
 }
 
 function updatePipedriveDataMiddleware(req, res, next) {
-  const { dealId, updatedData } = req.body;
+  const { personId, updatedData } = req.body;
 
-  updatePipedriveData(dealId, updatedData) // Use the function directly here
+  updatePipedriveData(personId, updatedData) // Use the function directly here
     .then((updatedData) => {
       req.updatedPipedriveData = updatedData;
       next();
@@ -60,7 +60,7 @@ function updatePipedriveDataMiddleware(req, res, next) {
       res.status(500).json({ error: 'Error occurred while updating data in Pipedrive' });
     });
 }
-
+console.log("Pipe")
 // Export the middleware functions directly
 module.exports = {
   fetchPipedriveDataMiddleware,

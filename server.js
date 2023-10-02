@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Import your route handlers and middleware
-const routes = require('./routes');
+const routes = require('./src/routes');
 const hubMiddleware = require('./hub');
 const pipeMiddleware = require('./pipe');
 
